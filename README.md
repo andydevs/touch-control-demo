@@ -5,6 +5,15 @@ Web Template
 
 Use this template for building basic static websites.
 
+Create A new Website
+-----------------------------------------------------------
+
+On the repository webpage, you can either click 
+`Use this Template` which will create a new repository with
+the template code, or you can click `Deploy to Netlify` in
+the README, which will both create a new repository and
+deploy a new website to Netlify.
+
 Development
 -----------------------------------------------------------
 
