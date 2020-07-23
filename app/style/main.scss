@@ -5,16 +5,30 @@
  * Created: 7 - 22 - 2020
  */
 $spacing-unit: 8pt;
+$profile-color: #86a879;
+$snippets-color: #82adb6;
+$settings-color: #a384b9;
 
 #layout {
     display: flex;
     flex-direction: row;
 }
 
+#panel-profile {
+    background-color: $profile-color;
+}
+
+#panel-snippets {
+    background-color: $snippets-color;
+}
+
+#panel-settings {
+    background-color: $settings-color;
+}
+
 .panel {
     flex: 1;
     margin: $spacing-unit;
-    border: 1px solid black;
 }
 
 .panel-content {
@@ -32,6 +46,7 @@ $spacing-unit: 8pt;
 .profile-photo {
     height: 150px;
     border-radius: 50%;
+    border: 1px solid darken($profile-color, 10%);
 }
 
 .button-controls {
