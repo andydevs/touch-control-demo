@@ -1,7 +1,7 @@
 Web Template
 ===========================================================
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/andydevs/web-boilerplate)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy)
 
 Use this template for building basic static websites [EDIT THIS PART WITH THE DESCRIPTION OF YOUR SITE].
 
