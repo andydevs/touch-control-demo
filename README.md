@@ -29,15 +29,15 @@ _Technologies_
 
 _Folder Structure_
 
-| Folder      |                                 Use |
-|:------------|------------------------------------:|
-| `app`       |                    Application Code |
-| `app/style` |                    SCSS Stylesheets |
-| `pages`     |                 HTML Pages &#x271D; |
-| `assets`    | Static Assets for the Site &#x271D; |
-| `public`    |     Build Output Directory for Site |
+| Folder      |                             Use |
+|:------------|--------------------------------:|
+| `app`       |                Application Code |
+| `app/style` |                SCSS Stylesheets |
+| `pages`     |                   HTML Pages \* |
+| `assets`    |   Static Assets for the Site \* |
+| `public`    | Build Output Directory for Site |
 
-&#x271D; _Folder contents (subfolders included) are copied over to the `public` directory_
+\* _Folder contents (subfolders included) are copied over to the `public` directory_
 
 ### Building and Running
 
