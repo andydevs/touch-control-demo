@@ -4,7 +4,44 @@
  * Author:  Anshul Kharbanda
  * Created: 7 - 22 - 2020
  */
+$spacing-unit: 8pt;
+
+#layout {
+    display: flex;
+    flex-direction: row;
+}
 
 .panel {
+    flex: 1;
+    margin: $spacing-unit;
     border: 1px solid black;
+}
+
+.panel-content {
+    padding: $spacing-unit;
+}
+
+.profile-summary {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto 1fr;
+    gap: $spacing-unit $spacing-unit;
+    align-items: center;
+}
+
+.profile-photo {
+    height: 150px;
+    border-radius: 50%;
+}
+
+.button-controls {
+    display: flex;
+    flex-direction: row-reverse;
+    button {
+        margin: 0pt $spacing-unit / 2;
+    }
+}
+
+.settings-form-row {
+    margin: $spacing-unit 0pt;
 }
