@@ -3,20 +3,22 @@ Web Template
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/andydevs/web-boilerplate)
 
-Use this template for building basic static websites 
+Use this template for building basic static websites.
 
 On the repository webpage, you can either click 
 `Use this Template` which will create a new repository with
-the template code, or you can click `Deploy to Netlify` in
+the template code, or you can click the "Deploy to Netlify" button in
 the README, which will both create a new repository and
 deploy a new website to Netlify.
 
-[DELETE THE NETLIFY BUTTON AND EDIT THIS PART WITH THE DESCRIPTION OF YOUR SITE].
+**[DELETE THE NETLIFY BUTTON AND EDIT THIS PART WITH THE DESCRIPTION OF YOUR SITE]**
 
 Development
 -----------------------------------------------------------
 
-### Technologies
+### Application Architecture
+
+_Technologies_
 
 | Part              |  System |
 |:------------------|--------:|
@@ -25,21 +27,21 @@ Development
 | Stylesheets       |    SCSS |
 | Transpilation     |   Babel |
 
-### Folder Structure
+_Folder Structure_
 
-| Folder      |                             Use |
-|:------------|--------------------------------:|
-| `app`       |                Application Code |
-| `app/style` |                SCSS Stylesheets |
-| `pages`     |                 HTML Pages [^1] |
-| `assets`    | Static Assets for the Site [^1] |
-| `public`    | Build Output Directory for Site |
+| Folder      |                                 Use |
+|:------------|------------------------------------:|
+| `app`       |                    Application Code |
+| `app/style` |                    SCSS Stylesheets |
+| `pages`     |                 HTML Pages &#x271D; |
+| `assets`    | Static Assets for the Site &#x271D; |
+| `public`    |     Build Output Directory for Site |
 
-[^1]: Folder contents (subfolders included) are copied over to the `public` directory
+&#x271D; _Folder contents (subfolders included) are copied over to the `public` directory_
 
-### Running
+### Building and Running
 
-To build the program, run
+To build the app, run
 
     $ grunt
 
@@ -50,7 +52,6 @@ could be run with
 
 `grunt serve` will automatically open the built page in a web 
 browser and start watching for changes in any of these files.
-It will automatically rebuild the files if any changes occur.
 Due to the structure of this boilerplate (namely the html
 pages being copied over every build), you may need to fully 
 reload the webpage a couple times for it to update with the 
