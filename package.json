@@ -1,9 +1,9 @@
 {
-  "name": "my-website",
+  "name": "touch-control-demo",
   "version": "1.0.0",
-  "description": "",
-  "author": "",
-  "keywords": [],
+  "description": "A demo for a web UI using touch controls",
+  "author": "Anshul Kharbanda",
+  "keywords": ["touch", "web", "demo"],
   "license": "MIT",
   "private": true,
   "scripts": {},

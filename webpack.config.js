@@ -1,8 +1,8 @@
 /**
  * Use this template for building basic static websites
  * 
- * Author:  [Your Name Here]
- * Created: [Date of Creation]
+ * Author:  Anshul Kharbanda
+ * Created: 7 - 22 - 2020
  */
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const path = require('path')
@@ -41,7 +41,10 @@ module.exports = {
     },
     plugins: [
         new CopyWebpackPlugin({
-            patterns: ['assets', 'pages']
+            patterns: [
+                { from: 'assets', noErrorOnMissing: true },
+                'pages'
+            ]
         })
     ]
 }

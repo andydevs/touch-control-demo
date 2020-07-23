@@ -1,8 +1,8 @@
 /**
  * Use this template for building basic static websites
  * 
- * Author:  [Your Name Here]
- * Created: [Date of Creation]
+ * Author:  Anshul Kharbanda
+ * Created: 7 - 22 - 2020
  */
 const webpackConfig = require('./webpack.config')
 
