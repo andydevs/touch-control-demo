@@ -4,3 +4,4 @@
  * Author:  Anshul Kharbanda
  * Created: 7 - 22 - 2020
  */
+import './style/main.scss'
