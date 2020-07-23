@@ -3,9 +3,9 @@ Web Template
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/andydevs/web-boilerplate)
 
-Use this template for building basic static websites.
+Use this template for building basic static websites [EDIT THIS PART WITH THE DESCRIPTION OF YOUR SITE].
 
-Create A new Website
+Create A new Website [DELETE THIS SECTION IN YOUR SITE]
 -----------------------------------------------------------
 
 On the repository webpage, you can either click 
@@ -17,9 +17,30 @@ deploy a new website to Netlify.
 Development
 -----------------------------------------------------------
 
-This boilerplate code uses Grunt for running and managing
-tasks, and Webpack for building and bundling code. To build
-the program, just run
+### Technologies
+
+| Part              |  System |
+|:------------------|--------:|
+| Task Runner       |   Grunt |
+| Web Code Bundling | Webpack |
+| Stylesheets       |    SCSS |
+| Transpilation     |   Babel |
+
+### Folder Structure
+
+| Folder      |                             Use |
+|:------------|--------------------------------:|
+| `app`       |                Application Code |
+| `app/style` |                SCSS Stylesheets |
+| `pages`     |                 HTML Pages [^1] |
+| `assets`    | Static Assets for the Site [^1] |
+| `public`    | Build Output Directory for Site |
+
+[^1]: Folder contents (subfolders included) are copied over to the `public` directory
+
+### Running
+
+To build the program, run
 
     $ grunt
 
@@ -28,18 +49,10 @@ could be run with
 
     $ grunt serve
 
-Webpack emits build outputs to the `public` directory. The
-javascript and scss (this boilerplate uses SCSS) files are 
-in the `app` directory, with the SCSS files being in `style`. 
-The `pages` directory contains the html pages for the website, 
-and the `assets` directory contains images, fonts, and other 
-assets and resources for the website. Webpack automatically 
-copies these files into the website directory.
-
 `grunt serve` will automatically open the built page in a web 
 browser and start watching for changes in any of these files.
 It will automatically rebuild the files if any changes occur.
 Due to the structure of this boilerplate (namely the html
-pages being copied over every build), the web browser will
-need to refresh the webpage a couple times for it to
-update with the changes.
+pages being copied over every build), you may need to fully 
+reload the webpage a couple times for it to update with the 
+changes.
