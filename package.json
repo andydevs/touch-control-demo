@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "A demo for a web UI using touch controls",
   "author": "Anshul Kharbanda",
-  "keywords": ["touch", "web", "demo"],
+  "keywords": [
+    "touch",
+    "web",
+    "demo"
+  ],
   "license": "MIT",
   "private": true,
   "scripts": {},
@@ -22,5 +26,8 @@
     "sass-loader": "^9.0.2",
     "node-sass": "^4.14.1",
     "copy-webpack-plugin": "^6.0.3"
+  },
+  "dependencies": {
+    "jquery": "^3.5.1"
   }
 }

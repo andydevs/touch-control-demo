@@ -4,6 +4,7 @@
  * Author:  Anshul Kharbanda
  * Created: 7 - 22 - 2020
  */
+const ProvidePlugin = require('webpack').ProvidePlugin
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const path = require('path')
 
@@ -45,6 +46,10 @@ module.exports = {
                 { from: 'assets', noErrorOnMissing: true },
                 'pages'
             ]
+        }),
+        new ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
         })
     ]
 }
