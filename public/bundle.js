@@ -104,23 +104,56 @@ __webpack_require__.r(__webpack_exports__);
  * Created: 7 - 22 - 2020
  */
 
+var $layout = $('#layout');
 var LEFT_ARROW = 37;
 var RIGHT_ARROW = 39;
 var state = 0;
-var $layout = $('#layout');
 
 function goLeftAction() {
   if (state > -1) {
-    $layout.css('left', '+=100vw');
+    $layout.animate({
+      'left': '+=100vw'
+    });
     state--;
   }
 }
 
 function goRightAction() {
   if (state < 1) {
-    $layout.css('left', '-=100vw');
+    $layout.animate({
+      'left': '-=100vw'
+    });
     state++;
   }
+}
+
+var THRESHOLD = 60;
+var xDown;
+var yDown;
+var xUp;
+var yUp;
+
+function startTouch(event) {
+  console.log('touchStart');
+  xDown = event.touches[0].clientX;
+}
+
+function moveTouch(event) {
+  console.log('touchMove');
+  xUp = event.touches[0].clientX;
+}
+
+function endTouch(event) {
+  var distance = Math.round((xUp - xDown) / $(window).width() * 100);
+
+  if (distance > THRESHOLD) {
+    goLeftAction();
+  } else if (distance < -THRESHOLD) {
+    goRightAction();
+  }
+
+  xDown = 0;
+  xUp = 0;
 }
 
 $(function () {
@@ -139,6 +172,9 @@ $(function () {
         break;
     }
   });
+  $('#layout').on('touchstart', startTouch);
+  $(window).on('touchmove', moveTouch);
+  $(window).on('touchend', endTouch);
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
@@ -184,7 +220,7 @@ module.exports = content.locals || {};
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "/**\r\n * Use this template for building basic static websites\r\n * \r\n * Author:  Anshul Kharbanda\r\n * Created: 7 - 22 - 2020\r\n */\nbody {\n  margin: 0pt;\n  overflow: hidden; }\n\n#layout {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  overflow: hidden;\n  display: flex;\n  flex-direction: row; }\n  @media screen and (max-width: 500px) {\n    #layout {\n      width: 300vw;\n      transform: translateX(-100vw); } }\n\n.panel {\n  position: static;\n  flex: 1;\n  margin: 8pt;\n  overflow-x: hidden;\n  overflow-y: auto; }\n\n#panel-profile {\n  background-color: #86a879; }\n\n#panel-snippets {\n  background-color: #82adb6; }\n\n#panel-settings {\n  background-color: #a384b9; }\n\n.panel-content {\n  padding: 8pt; }\n\n.profile-summary {\n  display: grid;\n  grid-template-rows: auto;\n  grid-template-columns: auto 1fr;\n  gap: 8pt 8pt;\n  align-items: center; }\n\n.profile-photo {\n  height: 150px;\n  border-radius: 50%;\n  border: 1px solid #6c905e; }\n\n.button-controls {\n  display: flex;\n  flex-direction: row-reverse; }\n  .button-controls button {\n    margin: 0pt 4pt; }\n\n.settings-form-row {\n  margin: 8pt 0pt; }\n", ""]);
+exports.push([module.i, "/**\r\n * Use this template for building basic static websites\r\n * \r\n * Author:  Anshul Kharbanda\r\n * Created: 7 - 22 - 2020\r\n */\nbody {\n  margin: 0pt;\n  overflow: hidden; }\n\n#app {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  overflow: hidden; }\n\n#layout {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  overflow: hidden;\n  display: flex;\n  flex-direction: row; }\n  @media screen and (max-width: 500px) {\n    #layout {\n      width: 300vw;\n      transform: translateX(-100vw); } }\n\n.panel {\n  position: static;\n  flex: 1;\n  margin: 8pt;\n  overflow-x: hidden;\n  overflow-y: auto; }\n\n#panel-profile {\n  background-color: #86a879; }\n\n#panel-snippets {\n  background-color: #82adb6; }\n\n#panel-settings {\n  background-color: #a384b9; }\n\n.panel-content {\n  padding: 8pt; }\n\n.profile-summary {\n  display: grid;\n  grid-template-rows: auto;\n  grid-template-columns: auto 1fr;\n  gap: 8pt 8pt;\n  align-items: center; }\n\n.profile-photo {\n  height: 150px;\n  border-radius: 50%;\n  border: 1px solid #6c905e; }\n\n.button-controls {\n  display: flex;\n  flex-direction: row-reverse; }\n  .button-controls button {\n    margin: 0pt 4pt; }\n\n.settings-form-row {\n  margin: 8pt 0pt; }\n", ""]);
 // Exports
 module.exports = exports;
 
