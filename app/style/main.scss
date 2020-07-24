@@ -8,10 +8,36 @@ $spacing-unit: 8pt;
 $profile-color: #86a879;
 $snippets-color: #82adb6;
 $settings-color: #a384b9;
+$mobile-width: 500px;
+
+body {
+    margin: 0pt;
+}
+
+@mixin on-mobile {
+    @media screen and (max-width: $mobile-width) {
+        @content;
+    }
+}
 
 #layout {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+
     display: flex;
     flex-direction: row;
+}
+
+.panel {
+    position: static;
+    flex: 1;
+    margin: $spacing-unit;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 #panel-profile {
@@ -26,9 +52,22 @@ $settings-color: #a384b9;
     background-color: $settings-color;
 }
 
-.panel {
-    flex: 1;
-    margin: $spacing-unit;
+@include on-mobile {
+    .panel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    #panel-profile {
+        transform: translateX(-100%);
+    }
+
+    #panel-settings {
+        transform: translateX(100%);
+    }
 }
 
 .panel-content {
