@@ -12,6 +12,7 @@ $mobile-width: 500px;
 
 body {
     margin: 0pt;
+    overflow: hidden;
 }
 
 @mixin on-mobile {
@@ -30,6 +31,11 @@ body {
 
     display: flex;
     flex-direction: row;
+
+    @include on-mobile {
+        width: 300vw;
+        transform: translateX(-100vw);
+    }
 }
 
 .panel {
@@ -50,24 +56,6 @@ body {
 
 #panel-settings {
     background-color: $settings-color;
-}
-
-@include on-mobile {
-    .panel {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }
-
-    #panel-profile {
-        transform: translateX(-100%);
-    }
-
-    #panel-settings {
-        transform: translateX(100%);
-    }
 }
 
 .panel-content {

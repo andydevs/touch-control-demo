@@ -9,12 +9,21 @@ import './style/main.scss'
 const LEFT_ARROW = 37
 const RIGHT_ARROW = 39
 
+let state = 0
+let $layout = $('#layout')
+
 function goLeftAction() {
-    console.log('Go Left')
+    if (state > -1) {
+        $layout.css('left', '+=100vw')
+        state--
+    }
 }
 
 function goRightAction() {
-    console.log('Go Right')
+    if (state < 1) {
+        $layout.css('left', '-=100vw')
+        state++
+    }
 }
 
 $(function() {
