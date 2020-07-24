@@ -4,10 +4,10 @@ Touch Control Webpage: TODO
 Upcoming
 --------------------------------------------------------
 
-- [ ] Desktop Web Site (Three Panels Side by Side)
-    - [ ] Content
-    - [ ] Styling
-- [ ] Mobile Website Scaffolding
+- [x] Desktop Web Site (Three Panels Side by Side)
+    - [x] Content
+    - [x] Styling
+- [x] Mobile Website Scaffolding
     - [ ] Disable on Desktop
 - [ ] Mobile Web Site using Vanilla Touch
 - [ ] Mobile Web Site using Hammer JS
