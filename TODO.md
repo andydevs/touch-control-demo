@@ -8,7 +8,7 @@ Upcoming
     - [x] Content
     - [x] Styling
 - [x] Mobile Website Scaffolding
-    - [ ] Disable on Desktop
+    - [x] Disable on Desktop
 - [x] Mobile Web Site using Vanilla Touch
 - [ ] Mobile Web Site using Hammer JS
 - [ ] Mobile Website with just scrolling
