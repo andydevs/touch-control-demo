@@ -9,6 +9,11 @@ $profile-color: #86a879;
 $snippets-color: #82adb6;
 $settings-color: #a384b9;
 $mobile-width: 500px;
+$font-family: "Calibri", "Arial", sans-serif;
+
+* {
+    font-family: $font-family;
+}
 
 body {
     margin: 0pt;
