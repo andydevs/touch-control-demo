@@ -13,17 +13,9 @@ import {
 import {
     reset
 } from './layout-control.js';
-import {
-    handleKeyEvent
-} from './keyboard-control.js';
 
 $(function() {
-    $(window).resize(function(event) {
-        reset()        
-    })
-
-    // Keydown event handler
-    $(window).keydown(handleKeyEvent)
+    $(window).resize(reset)
 
     $('#layout').on('touchstart', swipeDetectionStart)
     $(window).on('touchmove', swipeDetectionUpdate)

@@ -99,7 +99,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_main_scss__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./swipe-detection.js */ "./app/swipe-detection.js");
 /* harmony import */ var _layout_control_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./layout-control.js */ "./app/layout-control.js");
-/* harmony import */ var _keyboard_control_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./keyboard-control.js */ "./app/keyboard-control.js");
 /**
  * Use this template for building basic static websites
  * 
@@ -109,55 +108,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 $(function () {
-  $(window).resize(function (event) {
-    Object(_layout_control_js__WEBPACK_IMPORTED_MODULE_2__["reset"])();
-  }); // Keydown event handler
-
-  $(window).keydown(_keyboard_control_js__WEBPACK_IMPORTED_MODULE_3__["handleKeyEvent"]);
+  $(window).resize(_layout_control_js__WEBPACK_IMPORTED_MODULE_2__["reset"]);
   $('#layout').on('touchstart', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionStart"]);
   $(window).on('touchmove', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionUpdate"]);
   $(window).on('touchend', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionEnd"]);
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
-
-/***/ }),
-
-/***/ "./app/keyboard-control.js":
-/*!*********************************!*\
-  !*** ./app/keyboard-control.js ***!
-  \*********************************/
-/*! exports provided: handleKeyEvent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleKeyEvent", function() { return handleKeyEvent; });
-/* harmony import */ var _layout_control_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layout-control.js */ "./app/layout-control.js");
-/**
- * Use this template for building basic static websites
- * 
- * Author:  Anshul Kharbanda
- * Created: 7 - 22 - 2020
- */
-
-var LEFT_ARROW = 37;
-var RIGHT_ARROW = 39;
-function handleKeyEvent(event) {
-  switch (event.which) {
-    case LEFT_ARROW:
-      Object(_layout_control_js__WEBPACK_IMPORTED_MODULE_0__["goLeftAction"])();
-      break;
-
-    case RIGHT_ARROW:
-      Object(_layout_control_js__WEBPACK_IMPORTED_MODULE_0__["goRightAction"])();
-      break;
-
-    default:
-      break;
-  }
-}
 
 /***/ }),
 
