@@ -103,10 +103,9 @@ __webpack_require__.r(__webpack_exports__);
  * Author:  Anshul Kharbanda
  * Created: 7 - 22 - 2020
  */
+ // ====================== LAYOUT CONTROLS ========================
 
 var $layout = $('#layout');
-var LEFT_ARROW = 37;
-var RIGHT_ARROW = 39;
 var state = 0;
 
 function goLeftAction() {
@@ -125,53 +124,132 @@ function goRightAction() {
     });
     state++;
   }
-}
+} // ==================== KEY CONTROL HANDLER ======================
 
-var THRESHOLD = 60;
-var xDown;
-var yDown;
-var xUp;
-var yUp;
+
+var LEFT_ARROW = 37;
+var RIGHT_ARROW = 39;
+
+function handleKeyEvent(event) {
+  switch (event.which) {
+    case LEFT_ARROW:
+      goLeftAction();
+      break;
+
+    case RIGHT_ARROW:
+      goRightAction();
+      break;
+
+    default:
+      break;
+  }
+} // =================== SWIPE CONTROL HANDLER ====================
+// Threshold
+
+
+var THRESHOLD = 100; // Vectors
+
+var xDown, yDown;
+var xUp, yUp;
+var xDiff, yDiff; // Swipe info
+
+var direction;
+var swiped;
 
 function startTouch(event) {
-  console.log('touchStart');
-  xDown = event.touches[0].clientX;
+  // Get first touch
+  var touch = event.touches[0];
+  /*
+  We set up vector to equal down vector 
+  so that if touchmove event is not fired 
+  before touchend, the resulting difference 
+  vector is zero
+  */
+  // Update vectors
+
+  xDown = touch.clientX;
+  yDown = touch.clientY;
+  xUp = touch.clientX;
+  yUp = touch.clientY;
 }
 
 function moveTouch(event) {
-  console.log('touchMove');
-  xUp = event.touches[0].clientX;
+  // Update last touch
+  var touch = event.touches[0];
+  xUp = touch.clientX;
+  yUp = touch.clientY;
 }
 
 function endTouch(event) {
-  var distance = Math.round((xUp - xDown) / $(window).width() * 100);
+  // First console log
+  console.log('Detect swipe'); // Get difference of up and down vectors
 
-  if (distance > THRESHOLD) {
-    goLeftAction();
-  } else if (distance < -THRESHOLD) {
-    goRightAction();
+  xDiff = xUp - xDown;
+  yDiff = yUp - yDown;
+  console.log('Vector Difference:', xDiff, yDiff); // Get direction
+
+  if (Math.abs(xDiff) > Math.abs(yDiff)) {
+    if (xDiff > 0) {
+      direction = 'right';
+    } else {
+      direction = 'left';
+    }
+  } else if (Math.abs(yDiff) > Math.abs(xDiff)) {
+    if (yDiff > 0) {
+      direction = 'down';
+    } else {
+      direction = 'up';
+    }
+  } else {
+    direction = 'unknown';
   }
 
-  xDown = 0;
-  xUp = 0;
-}
+  console.log('Direction:', direction); // Detect swipe
 
-$(function () {
-  // Keydown event handler
-  $(window).keydown(function (event) {
-    switch (event.which) {
-      case LEFT_ARROW:
+  switch (direction) {
+    case 'right':
+      swiped = xDiff > THRESHOLD;
+      break;
+
+    case 'left':
+      swiped = xDiff < -THRESHOLD;
+      break;
+
+    case 'up':
+      swiped = yDiff > THRESHOLD;
+      break;
+
+    case 'down':
+      swiped = yDiff < -THRESHOLD;
+      break;
+
+    case 'unknown':
+    default:
+      swiped = false;
+      break;
+  }
+
+  console.log('Swiped', swiped); // Handle swipe response
+
+  if (swiped) {
+    switch (direction) {
+      case 'right':
         goLeftAction();
         break;
 
-      case RIGHT_ARROW:
+      case 'left':
         goRightAction();
         break;
 
       default:
         break;
     }
-  });
+  }
+}
+
+$(function () {
+  // Keydown event handler
+  $(window).keydown(handleKeyEvent);
   $('#layout').on('touchstart', startTouch);
   $(window).on('touchmove', moveTouch);
   $(window).on('touchend', endTouch);

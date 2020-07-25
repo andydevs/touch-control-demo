@@ -6,10 +6,9 @@
  */
 import './style/main.scss'
 
-let $layout = $('#layout')
+// ====================== LAYOUT CONTROLS ========================
 
-const LEFT_ARROW = 37
-const RIGHT_ARROW = 39
+let $layout = $('#layout')
 
 let state = 0
 
@@ -27,49 +26,133 @@ function goRightAction() {
     }
 }
 
+// ==================== KEY CONTROL HANDLER ======================
 
-const THRESHOLD = 60
-let xDown
-let xUp
+const LEFT_ARROW = 37
+const RIGHT_ARROW = 39
+
+function handleKeyEvent(event) {
+    switch (event.which) {
+        case LEFT_ARROW:
+            goLeftAction()
+            break;
+        case RIGHT_ARROW:
+            goRightAction()
+            break;
+        default:
+            break;
+    }
+}
+
+// =================== SWIPE CONTROL HANDLER ====================
+
+// Threshold
+const THRESHOLD = 100
+
+// Vectors
+let xDown, yDown
+let xUp, yUp
+let xDiff, yDiff
+
+// Swipe info
+let direction
+let swiped
 
 function startTouch(event) {
-    console.log('touchStart')
-    xDown = event.touches[0].clientX
+    // Get first touch
+    let touch = event.touches[0]
+ 
+    /*
+    We set up vector to equal down vector 
+    so that if touchmove event is not fired 
+    before touchend, the resulting difference 
+    vector is zero
+    */
+
+    // Update vectors
+    xDown = touch.clientX
+    yDown = touch.clientY
+    xUp = touch.clientX
+    yUp = touch.clientY
 }
 
 function moveTouch(event) {
-    console.log('touchMove')
-    xUp = event.touches[0].clientX
+    // Update last touch
+    let touch = event.touches[0]
+    xUp = touch.clientX
+    yUp = touch.clientY
 }
 
 function endTouch(event) {
-    let distance = Math.round( (xUp - xDown) / $(window).width() * 100 )
-    if (distance > THRESHOLD) {
-        goLeftAction()
+    // First console log
+    console.log('Detect swipe')
+
+    // Get difference of up and down vectors
+    xDiff = xUp - xDown
+    yDiff = yUp - yDown
+    console.log('Vector Difference:', xDiff, yDiff)
+
+    // Get direction
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+        if (xDiff > 0) {
+            direction = 'right'
+        }
+        else {
+            direction = 'left'
+        }
     }
-    else if (distance < -THRESHOLD) {
-        goRightAction()
+    else if (Math.abs(yDiff) > Math.abs(xDiff)) {
+        if (yDiff > 0) {
+            direction = 'down'
+        }
+        else {
+            direction = 'up'
+        }
     }
+    else {
+        direction = 'unknown'
+    }
+    console.log('Direction:', direction)
 
-    xDown = 0
-    xUp = 0
-}
+    // Detect swipe
+    switch (direction) {
+        case 'right':
+            swiped = xDiff > THRESHOLD
+            break;
+        case 'left':
+            swiped = xDiff < -THRESHOLD
+            break;
+        case 'up':
+            swiped = yDiff > THRESHOLD
+            break;
+        case 'down':
+            swiped = yDiff < -THRESHOLD
+            break;
+        case 'unknown':
+        default:
+            swiped = false;
+            break;
+    }
+    console.log('Swiped:', swiped)
 
-
-$(function() {
-    // Keydown event handler
-    $(window).keydown(function(event) {
-        switch (event.which) {
-            case LEFT_ARROW:
+    // Handle swipe response
+    if (swiped) {
+        switch (direction) {
+            case 'right':
                 goLeftAction()
                 break;
-            case RIGHT_ARROW:
+            case 'left':
                 goRightAction()
                 break;
             default:
                 break;
         }
-    })
+    }
+}
+
+$(function() {
+    // Keydown event handler
+    $(window).keydown(handleKeyEvent)
 
     $('#layout').on('touchstart', startTouch)
     $(window).on('touchmove', moveTouch)
