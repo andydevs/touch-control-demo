@@ -110,7 +110,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var MOBILE_WIDTH = 500;
 $(function () {
   $(window).resize(function (event) {
     Object(_layout_control_js__WEBPACK_IMPORTED_MODULE_2__["reset"])();
