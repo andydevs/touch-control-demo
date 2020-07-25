@@ -97,6 +97,8 @@
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style/main.scss */ "./app/style/main.scss");
 /* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_main_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./swipe-detection.js */ "./app/swipe-detection.js");
+/* harmony import */ var _keyboard_control_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./keyboard-control.js */ "./app/keyboard-control.js");
 /**
  * Use this template for building basic static websites
  * 
@@ -104,11 +106,77 @@ __webpack_require__.r(__webpack_exports__);
  * Created: 7 - 22 - 2020
  */
 
-var MOBILE_WIDTH = 500; // ====================== LAYOUT CONTROLS ========================
 
+
+var MOBILE_WIDTH = 500;
+$(function () {
+  // Keydown event handler
+  $(window).keydown(_keyboard_control_js__WEBPACK_IMPORTED_MODULE_2__["handleKeyEvent"]);
+  $('#layout').on('touchstart', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionStart"]);
+  $(window).on('touchmove', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionUpdate"]);
+  $(window).on('touchend', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionEnd"]);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+
+/***/ }),
+
+/***/ "./app/keyboard-control.js":
+/*!*********************************!*\
+  !*** ./app/keyboard-control.js ***!
+  \*********************************/
+/*! exports provided: handleKeyEvent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleKeyEvent", function() { return handleKeyEvent; });
+/* harmony import */ var _layout_control_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layout-control.js */ "./app/layout-control.js");
+/**
+ * Use this template for building basic static websites
+ * 
+ * Author:  Anshul Kharbanda
+ * Created: 7 - 22 - 2020
+ */
+
+var LEFT_ARROW = 37;
+var RIGHT_ARROW = 39;
+function handleKeyEvent(event) {
+  switch (event.which) {
+    case LEFT_ARROW:
+      Object(_layout_control_js__WEBPACK_IMPORTED_MODULE_0__["goLeftAction"])();
+      break;
+
+    case RIGHT_ARROW:
+      Object(_layout_control_js__WEBPACK_IMPORTED_MODULE_0__["goRightAction"])();
+      break;
+
+    default:
+      break;
+  }
+}
+
+/***/ }),
+
+/***/ "./app/layout-control.js":
+/*!*******************************!*\
+  !*** ./app/layout-control.js ***!
+  \*******************************/
+/*! exports provided: goLeftAction, goRightAction, reset */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "goLeftAction", function() { return goLeftAction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "goRightAction", function() { return goRightAction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reset", function() { return reset; });
+/**
+ * Use this template for building basic static websites
+ * 
+ * Author:  Anshul Kharbanda
+ * Created: 7 - 22 - 2020
+ */
 var $layout = $('#layout');
 var state = 0;
-
 function goLeftAction() {
   if (state > -1) {
     $layout.animate({
@@ -117,7 +185,6 @@ function goLeftAction() {
     state--;
   }
 }
-
 function goRightAction() {
   if (state < 1) {
     $layout.animate({
@@ -126,34 +193,65 @@ function goRightAction() {
     state++;
   }
 }
-
 function reset() {
   $layout.css({
     'left': '0'
   });
   state = 0;
-} // ==================== KEY CONTROL HANDLER ======================
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+
+/***/ }),
+
+/***/ "./app/style/main.scss":
+/*!*****************************!*\
+  !*** ./app/style/main.scss ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js!../../node_modules/sass-loader/dist/cjs.js!./main.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./app/style/main.scss");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
 
 
-var LEFT_ARROW = 37;
-var RIGHT_ARROW = 39;
 
-function handleKeyEvent(event) {
-  switch (event.which) {
-    case LEFT_ARROW:
-      goLeftAction();
-      break;
+module.exports = content.locals || {};
 
-    case RIGHT_ARROW:
-      goRightAction();
-      break;
+/***/ }),
 
-    default:
-      break;
-  }
-} // =================== SWIPE CONTROL HANDLER ====================
-// Threshold
+/***/ "./app/swipe-detection.js":
+/*!********************************!*\
+  !*** ./app/swipe-detection.js ***!
+  \********************************/
+/*! exports provided: swipeDetectionStart, swipeDetectionUpdate, swipeDetectionEnd */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "swipeDetectionStart", function() { return swipeDetectionStart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "swipeDetectionUpdate", function() { return swipeDetectionUpdate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "swipeDetectionEnd", function() { return swipeDetectionEnd; });
+/* harmony import */ var _layout_control_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layout-control.js */ "./app/layout-control.js");
+/**
+ * Use this template for building basic static websites
+ * 
+ * Author:  Anshul Kharbanda
+ * Created: 7 - 22 - 2020
+ */
+ // Threshold
 
 var DISTANCE_THRESHOLD = 100;
 var TIME_THRESHOLD = 200; // Vectors
@@ -171,7 +269,7 @@ var swiped;
  * @param {TouchEvent} event javascript touch event
  */
 
-function startTouch(event) {
+function swipeDetectionStart(event) {
   // Get first touch
   var touch = event.touches[0];
   /*
@@ -205,8 +303,7 @@ function startTouch(event) {
  * @param {TouchEvent} event javascript touch event
  */
 
-
-function moveTouch(event) {
+function swipeDetectionUpdate(event) {
   /**
    * Since touchend doesn't store any
    * touches, we will need to continuously
@@ -227,8 +324,7 @@ function moveTouch(event) {
  * @param {TouchEvent} event javascript touch event
  */
 
-
-function endTouch(event) {
+function swipeDetectionEnd(event) {
   // First console log
   console.log('Detect swipe'); // Get difference of up and down vectors and times
 
@@ -288,11 +384,11 @@ function endTouch(event) {
   if (swiped) {
     switch (direction) {
       case 'right':
-        goLeftAction();
+        Object(_layout_control_js__WEBPACK_IMPORTED_MODULE_0__["goLeftAction"])();
         break;
 
       case 'left':
-        goRightAction();
+        Object(_layout_control_js__WEBPACK_IMPORTED_MODULE_0__["goRightAction"])();
         break;
 
       default:
@@ -300,44 +396,6 @@ function endTouch(event) {
     }
   }
 }
-
-$(function () {
-  // Keydown event handler
-  $(window).keydown(handleKeyEvent);
-  $('#layout').on('touchstart', startTouch);
-  $(window).on('touchmove', moveTouch);
-  $(window).on('touchend', endTouch);
-});
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
-
-/***/ }),
-
-/***/ "./app/style/main.scss":
-/*!*****************************!*\
-  !*** ./app/style/main.scss ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var api = __webpack_require__(/*! ../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-            var content = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js!../../node_modules/sass-loader/dist/cjs.js!./main.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./app/style/main.scss");
-
-            content = content.__esModule ? content.default : content;
-
-            if (typeof content === 'string') {
-              content = [[module.i, content, '']];
-            }
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = api(content, options);
-
-
-
-module.exports = content.locals || {};
 
 /***/ }),
 
