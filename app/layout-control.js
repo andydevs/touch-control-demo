@@ -11,14 +11,14 @@ let state = 0
 
 export function goLeftAction() {
     if (state > -1) {
-        $layout.animate({ 'left': '+=100vw' })
+        $layout.animate({ 'left': '+=100vw' }, 'fast')
         state--
     }
 }
 
 export function goRightAction() {
     if (state < 1) {
-        $layout.animate({ 'left': '-=100vw' })
+        $layout.animate({ 'left': '-=100vw' }, 'fast')
         state++
     }
 }

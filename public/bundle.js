@@ -98,7 +98,8 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style/main.scss */ "./app/style/main.scss");
 /* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_main_scss__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./swipe-detection.js */ "./app/swipe-detection.js");
-/* harmony import */ var _keyboard_control_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./keyboard-control.js */ "./app/keyboard-control.js");
+/* harmony import */ var _layout_control_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./layout-control.js */ "./app/layout-control.js");
+/* harmony import */ var _keyboard_control_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./keyboard-control.js */ "./app/keyboard-control.js");
 /**
  * Use this template for building basic static websites
  * 
@@ -108,10 +109,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var MOBILE_WIDTH = 500;
 $(function () {
-  // Keydown event handler
-  $(window).keydown(_keyboard_control_js__WEBPACK_IMPORTED_MODULE_2__["handleKeyEvent"]);
+  $(window).resize(function (event) {
+    Object(_layout_control_js__WEBPACK_IMPORTED_MODULE_2__["reset"])();
+  }); // Keydown event handler
+
+  $(window).keydown(_keyboard_control_js__WEBPACK_IMPORTED_MODULE_3__["handleKeyEvent"]);
   $('#layout').on('touchstart', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionStart"]);
   $(window).on('touchmove', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionUpdate"]);
   $(window).on('touchend', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionEnd"]);
@@ -181,7 +186,7 @@ function goLeftAction() {
   if (state > -1) {
     $layout.animate({
       'left': '+=100vw'
-    });
+    }, 'fast');
     state--;
   }
 }
@@ -189,7 +194,7 @@ function goRightAction() {
   if (state < 1) {
     $layout.animate({
       'left': '-=100vw'
-    });
+    }, 'fast');
     state++;
   }
 }

@@ -11,12 +11,19 @@ import {
     swipeDetectionEnd
 } from './swipe-detection.js';
 import {
+    reset
+} from './layout-control.js';
+import {
     handleKeyEvent
 } from './keyboard-control.js';
 
 const MOBILE_WIDTH = 500
 
 $(function() {
+    $(window).resize(function(event) {
+        reset()        
+    })
+
     // Keydown event handler
     $(window).keydown(handleKeyEvent)
 
