@@ -5,9 +5,7 @@
  * Created: 7 - 22 - 2020
  */
 import './style/main.scss'
-import {
-    swipeDetectionStart
-} from './swipe-detection.js';
+import './swipe-detection.js'
 
 export function getState($element) {
     let pixels = $element.css('left')
@@ -28,8 +26,7 @@ $(function() {
         $('#layout').css({ 'left': '0' })
     })
 
-    $('#layout')
-        .on('touchstart', swipeDetectionStart)
+    $('#layout').swipeDetection()
         .on('swipeleft', function(event) {
             let state = getState($(this))
             console.log('Current State:', state)

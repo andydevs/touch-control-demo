@@ -99,6 +99,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style/main.scss */ "./app/style/main.scss");
 /* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_main_scss__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./swipe-detection.js */ "./app/swipe-detection.js");
+/* harmony import */ var _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__);
 /**
  * Use this template for building basic static websites
  * 
@@ -125,7 +126,7 @@ $(function () {
       'left': '0'
     });
   });
-  $('#layout').on('touchstart', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionStart"]).on('swipeleft', function (event) {
+  $('#layout').swipeDetection().on('swipeleft', function (event) {
     var state = getState($(this));
     console.log('Current State:', state);
 
@@ -182,15 +183,10 @@ module.exports = content.locals || {};
 /*!********************************!*\
   !*** ./app/swipe-detection.js ***!
   \********************************/
-/*! exports provided: swipeDetectionStart, swipeDetectionUpdate, swipeDetectionEnd */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "swipeDetectionStart", function() { return swipeDetectionStart; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "swipeDetectionUpdate", function() { return swipeDetectionUpdate; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "swipeDetectionEnd", function() { return swipeDetectionEnd; });
-/**
+/* WEBPACK VAR INJECTION */(function($, jQuery) {/**
  * Use this template for building basic static websites
  * 
  * Author:  Anshul Kharbanda
@@ -202,9 +198,7 @@ var TIME_THRESHOLD = 200; // Vectors
 
 var tDown, xDown, yDown;
 var tUp, xUp, yUp;
-var tDiff, xDiff, yDiff; // Swipe info
-
-var direction, swiped;
+var tDiff, xDiff, yDiff;
 /**
  * Handles touchstart events, initializes swipe 
  * detection system
@@ -249,6 +243,7 @@ function swipeDetectionStart(event) {
  * @param {TouchEvent} event javascript touch event
  */
 
+
 function swipeDetectionUpdate(event) {
   /*
   Since touchend doesn't store any
@@ -270,8 +265,11 @@ function swipeDetectionUpdate(event) {
  * @param {TouchEvent} event javascript touch event
  */
 
+
 function swipeDetectionEnd(event) {
-  // First console log
+  // Swipe info
+  var direction, swiped; // First console log
+
   console.log('Detect swipe'); // Get difference of up and down vectors and times
 
   xDiff = xUp - xDown;
@@ -346,7 +344,25 @@ function swipeDetectionEnd(event) {
   $(this).off('touchmove', swipeDetectionUpdate);
   $(this).off('touchend', swipeDetectionEnd);
 }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+/**
+ * Jquery plugin
+ * 
+ * @param {jQuery} $ jquery shortcut
+ */
+
+
+(function ($) {
+  /**
+   * Setup swipe detection
+   * 
+   * @returns {jQuery} jQuery element
+   */
+  $.fn.swipeDetection = function () {
+    this.on('touchstart', swipeDetectionStart);
+    return this;
+  };
+})(jQuery);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 

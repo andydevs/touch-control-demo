@@ -13,16 +13,13 @@ let tDown, xDown, yDown
 let tUp, xUp, yUp
 let tDiff, xDiff, yDiff
 
-// Swipe info
-let direction, swiped
-
 /**
  * Handles touchstart events, initializes swipe 
  * detection system
  * 
  * @param {TouchEvent} event javascript touch event
  */
-export function swipeDetectionStart(event) {
+function swipeDetectionStart(event) {
     // Get first touch
     let touch = event.touches[0]
  
@@ -62,7 +59,7 @@ export function swipeDetectionStart(event) {
  * 
  * @param {TouchEvent} event javascript touch event
  */
-export function swipeDetectionUpdate(event) {
+function swipeDetectionUpdate(event) {
     /*
     Since touchend doesn't store any
     touches, we will need to continuously
@@ -86,7 +83,10 @@ export function swipeDetectionUpdate(event) {
  * 
  * @param {TouchEvent} event javascript touch event
  */
-export function swipeDetectionEnd(event) {
+function swipeDetectionEnd(event) {
+    // Swipe info
+    let direction, swiped
+
     // First console log
     console.log('Detect swipe')
 
@@ -163,3 +163,22 @@ export function swipeDetectionEnd(event) {
     $(this).off('touchmove', swipeDetectionUpdate)
     $(this).off('touchend', swipeDetectionEnd)
 }
+
+/**
+ * Jquery plugin
+ * 
+ * @param {jQuery} $ jquery shortcut
+ */
+(function($) {
+
+    /**
+     * Setup swipe detection
+     * 
+     * @returns {jQuery} jQuery element
+     */
+    $.fn.swipeDetection = function() {
+        this.on('touchstart', swipeDetectionStart)
+        return this
+    }
+
+})(jQuery)
