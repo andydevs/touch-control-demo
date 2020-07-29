@@ -84,11 +84,9 @@ function swipeDetectionUpdate(event) {
  * @param {TouchEvent} event javascript touch event
  */
 function swipeDetectionEnd(event) {
-    // Swipe info
-    let direction, swiped
-
-    // First console log
-    console.log('Detect swipe')
+    // Setup stuff
+    console.group('Swipe Detection')
+    let direction, swiped // Swipe info
 
     // Get difference of up and down vectors and times
     xDiff = xUp - xDown
@@ -145,9 +143,18 @@ function swipeDetectionEnd(event) {
     swiped = swiped && (tDiff < TIME_THRESHOLD)
     console.log('Swiped:', swiped)
 
-    // Handle swipe response trigger event
+    // End group
+    console.groupEnd()
+
+    // Trigger event based on swipe
     if (swiped) {
         switch (direction) {
+            case 'up':
+                $(this).trigger('swipeup')
+                break;
+            case 'down':
+                $(this).trigger('swipedown')
+                break;
             case 'right':
                 $(this).trigger('swiperight')
                 break;

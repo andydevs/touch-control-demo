@@ -90,13 +90,12 @@
 /*!**********************!*\
   !*** ./app/index.js ***!
   \**********************/
-/*! exports provided: getState */
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getState", function() { return getState; });
-/* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style/main.scss */ "./app/style/main.scss");
+/* WEBPACK VAR INJECTION */(function(jQuery, $) {/* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style/main.scss */ "./app/style/main.scss");
 /* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_main_scss__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./swipe-detection.js */ "./app/swipe-detection.js");
 /* harmony import */ var _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__);
@@ -108,18 +107,30 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-function getState($element) {
-  var pixels = $element.css('left');
-  var firstChar = pixels[0];
+/**
+ * Jquery plugin for get state
+ */
 
-  if (firstChar === '-') {
-    return 1;
-  } else if (firstChar === '0') {
-    return 0;
-  } else {
-    return -1;
-  }
-}
+(function ($) {
+  /**
+   * Compute carousel state based on position
+   * 
+   * @returns {int} integer state
+   */
+  $.fn.carouselState = function () {
+    var pixels = $(this).css('left');
+    var firstChar = pixels[0];
+
+    if (firstChar === '-') {
+      return 1;
+    } else if (firstChar === '0') {
+      return 0;
+    } else {
+      return -1;
+    }
+  };
+})(jQuery);
+
 $(function () {
   $(window).resize(function (event) {
     $('#layout').css({
@@ -127,26 +138,38 @@ $(function () {
     });
   });
   $('#layout').swipeDetection().on('swipeleft', function (event) {
-    var state = getState($(this));
+    console.group('Swipe Left');
+    var state = $(this).carouselState();
     console.log('Current State:', state);
 
     if (state < 1) {
       $(this).animate({
         'left': '-=100vw'
       }, 'fast');
+      console.log('Go to right panel');
+    } else {
+      console.log('At rightmost panel');
     }
+
+    console.groupEnd();
   }).on('swiperight', function (event) {
-    var state = getState($(this));
+    console.group('Swipe Right');
+    var state = $(this).carouselState();
     console.log('Current State:', state);
 
     if (state > -1) {
       $(this).animate({
         'left': '+=100vw'
       }, 'fast');
+      console.log('Go to left panel');
+    } else {
+      console.log('At leftmost panel');
     }
+
+    console.groupEnd();
   });
 });
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
@@ -267,10 +290,10 @@ function swipeDetectionUpdate(event) {
 
 
 function swipeDetectionEnd(event) {
-  // Swipe info
-  var direction, swiped; // First console log
-
-  console.log('Detect swipe'); // Get difference of up and down vectors and times
+  // Setup stuff
+  console.group('Swipe Detection');
+  var direction, swiped; // Swipe info
+  // Get difference of up and down vectors and times
 
   xDiff = xUp - xDown;
   yDiff = yUp - yDown;
@@ -323,10 +346,20 @@ function swipeDetectionEnd(event) {
   }
 
   swiped = swiped && tDiff < TIME_THRESHOLD;
-  console.log('Swiped:', swiped); // Handle swipe response trigger event
+  console.log('Swiped:', swiped); // End group
+
+  console.groupEnd(); // Trigger event based on swipe
 
   if (swiped) {
     switch (direction) {
+      case 'up':
+        $(this).trigger('swipeup');
+        break;
+
+      case 'down':
+        $(this).trigger('swipedown');
+        break;
+
       case 'right':
         $(this).trigger('swiperight');
         break;
