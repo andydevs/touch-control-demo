@@ -14,8 +14,7 @@ let tUp, xUp, yUp
 let tDiff, xDiff, yDiff
 
 // Swipe info
-let direction
-let swiped
+let direction, swiped
 
 /**
  * Handles touchstart events, initializes swipe 
@@ -146,7 +145,7 @@ export function swipeDetectionEnd(event) {
     swiped = swiped && (tDiff < TIME_THRESHOLD)
     console.log('Swiped:', swiped)
 
-    // Handle swipe response
+    // Handle swipe response trigger event
     if (swiped) {
         switch (direction) {
             case 'right':

@@ -24,8 +24,8 @@ export function getState($element) {
 }
 
 $(function() {
-    $(window).resize(function reset() {
-        $layout.css({ 'left': '0' })
+    $(window).resize(function(event) {
+        $('#layout').css({ 'left': '0' })
     })
 
     $('#layout')

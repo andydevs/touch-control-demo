@@ -120,8 +120,8 @@ function getState($element) {
   }
 }
 $(function () {
-  $(window).resize(function reset() {
-    $layout.css({
+  $(window).resize(function (event) {
+    $('#layout').css({
       'left': '0'
     });
   });
@@ -204,8 +204,7 @@ var tDown, xDown, yDown;
 var tUp, xUp, yUp;
 var tDiff, xDiff, yDiff; // Swipe info
 
-var direction;
-var swiped;
+var direction, swiped;
 /**
  * Handles touchstart events, initializes swipe 
  * detection system
@@ -326,7 +325,7 @@ function swipeDetectionEnd(event) {
   }
 
   swiped = swiped && tDiff < TIME_THRESHOLD;
-  console.log('Swiped:', swiped); // Handle swipe response
+  console.log('Swiped:', swiped); // Handle swipe response trigger event
 
   if (swiped) {
     switch (direction) {
