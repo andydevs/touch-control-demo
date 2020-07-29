@@ -90,54 +90,25 @@
 /*!**********************!*\
   !*** ./app/index.js ***!
   \**********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style/main.scss */ "./app/style/main.scss");
-/* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_main_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./swipe-detection.js */ "./app/swipe-detection.js");
-/* harmony import */ var _layout_control_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./layout-control.js */ "./app/layout-control.js");
-/**
- * Use this template for building basic static websites
- * 
- * Author:  Anshul Kharbanda
- * Created: 7 - 22 - 2020
- */
-
-
-
-$(function () {
-  $(window).resize(_layout_control_js__WEBPACK_IMPORTED_MODULE_2__["reset"]);
-  $('#layout').on('touchstart', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionStart"]);
-});
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
-
-/***/ }),
-
-/***/ "./app/layout-control.js":
-/*!*******************************!*\
-  !*** ./app/layout-control.js ***!
-  \*******************************/
-/*! exports provided: getState, goLeftAction, goRightAction, reset */
+/*! exports provided: getState */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function($) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getState", function() { return getState; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "goLeftAction", function() { return goLeftAction; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "goRightAction", function() { return goRightAction; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reset", function() { return reset; });
+/* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style/main.scss */ "./app/style/main.scss");
+/* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_main_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./swipe-detection.js */ "./app/swipe-detection.js");
 /**
  * Use this template for building basic static websites
  * 
  * Author:  Anshul Kharbanda
  * Created: 7 - 22 - 2020
  */
-var $layout = $('#layout');
-function getState() {
-  var pixels = $layout.css('left');
+
+
+function getState($element) {
+  var pixels = $element.css('left');
   var firstChar = pixels[0];
 
   if (firstChar === '-') {
@@ -148,31 +119,32 @@ function getState() {
     return -1;
   }
 }
-function goLeftAction() {
-  var state = getState();
-  console.log('Current State:', state);
-
-  if (state > -1) {
-    $layout.animate({
-      'left': '+=100vw'
-    }, 'fast');
-  }
-}
-function goRightAction() {
-  var state = getState();
-  console.log('Current State:', state);
-
-  if (state < 1) {
-    $layout.animate({
-      'left': '-=100vw'
-    }, 'fast');
-  }
-}
-function reset() {
-  $layout.css({
-    'left': '0'
+$(function () {
+  $(window).resize(function reset() {
+    $layout.css({
+      'left': '0'
+    });
   });
-}
+  $('#layout').on('touchstart', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionStart"]).on('swipeleft', function (event) {
+    var state = getState($(this));
+    console.log('Current State:', state);
+
+    if (state < 1) {
+      $(this).animate({
+        'left': '-=100vw'
+      }, 'fast');
+    }
+  }).on('swiperight', function (event) {
+    var state = getState($(this));
+    console.log('Current State:', state);
+
+    if (state > -1) {
+      $(this).animate({
+        'left': '+=100vw'
+      }, 'fast');
+    }
+  });
+});
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
@@ -218,15 +190,13 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function($) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "swipeDetectionStart", function() { return swipeDetectionStart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "swipeDetectionUpdate", function() { return swipeDetectionUpdate; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "swipeDetectionEnd", function() { return swipeDetectionEnd; });
-/* harmony import */ var _layout_control_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layout-control.js */ "./app/layout-control.js");
 /**
  * Use this template for building basic static websites
  * 
  * Author:  Anshul Kharbanda
  * Created: 7 - 22 - 2020
  */
- // Threshold
-
+// Threshold
 var DISTANCE_THRESHOLD = 100;
 var TIME_THRESHOLD = 200; // Vectors
 
@@ -361,11 +331,11 @@ function swipeDetectionEnd(event) {
   if (swiped) {
     switch (direction) {
       case 'right':
-        Object(_layout_control_js__WEBPACK_IMPORTED_MODULE_0__["goLeftAction"])();
+        $(this).trigger('swiperight');
         break;
 
       case 'left':
-        Object(_layout_control_js__WEBPACK_IMPORTED_MODULE_0__["goRightAction"])();
+        $(this).trigger('swipeleft');
         break;
 
       default:

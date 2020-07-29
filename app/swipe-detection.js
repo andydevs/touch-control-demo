@@ -4,11 +4,6 @@
  * Author:  Anshul Kharbanda
  * Created: 7 - 22 - 2020
  */
-import { 
-    goLeftAction,
-    goRightAction
-} from './layout-control.js';
-
 // Threshold
 const DISTANCE_THRESHOLD = 100
 const TIME_THRESHOLD = 200
@@ -155,10 +150,10 @@ export function swipeDetectionEnd(event) {
     if (swiped) {
         switch (direction) {
             case 'right':
-                goLeftAction()
+                $(this).trigger('swiperight')
                 break;
             case 'left':
-                goRightAction()
+                $(this).trigger('swipeleft')
                 break;
             default:
                 break;
