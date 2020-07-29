@@ -56,6 +56,10 @@ export function swipeDetectionStart(event) {
     // Initialize touch times
     tDown = Math.round(event.timeStamp)
     tUp = Infinity;
+
+    // Bind late events
+    $(this).on('touchmove', swipeDetectionUpdate)
+    $(this).on('touchend', swipeDetectionEnd)
 }
 
 /**
@@ -65,11 +69,11 @@ export function swipeDetectionStart(event) {
  * @param {TouchEvent} event javascript touch event
  */
 export function swipeDetectionUpdate(event) {
-    /**
-     * Since touchend doesn't store any
-     * touches, we will need to continuously
-     * update the up touch data in touchmove
-     */
+    /*
+    Since touchend doesn't store any
+    touches, we will need to continuously
+    update the up touch data in touchmove
+    */
     // Get first touch
     let touch = event.touches[0]
 
@@ -160,4 +164,8 @@ export function swipeDetectionEnd(event) {
                 break;
         }
     }
+
+    // Remove events
+    $(this).off('touchmove', swipeDetectionUpdate)
+    $(this).off('touchend', swipeDetectionEnd)
 }

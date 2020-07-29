@@ -6,9 +6,7 @@
  */
 import './style/main.scss'
 import {
-    swipeDetectionStart,
-    swipeDetectionUpdate,
-    swipeDetectionEnd
+    swipeDetectionStart
 } from './swipe-detection.js';
 import {
     reset
@@ -18,6 +16,4 @@ $(function() {
     $(window).resize(reset)
 
     $('#layout').on('touchstart', swipeDetectionStart)
-    $('#layout').on('touchmove', swipeDetectionUpdate)
-    $('#layout').on('touchend', swipeDetectionEnd)
 })

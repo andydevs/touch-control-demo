@@ -111,8 +111,6 @@ __webpack_require__.r(__webpack_exports__);
 $(function () {
   $(window).resize(_layout_control_js__WEBPACK_IMPORTED_MODULE_2__["reset"]);
   $('#layout').on('touchstart', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionStart"]);
-  $('#layout').on('touchmove', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionUpdate"]);
-  $('#layout').on('touchend', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionEnd"]);
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
@@ -217,7 +215,7 @@ module.exports = content.locals || {};
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "swipeDetectionStart", function() { return swipeDetectionStart; });
+/* WEBPACK VAR INJECTION */(function($) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "swipeDetectionStart", function() { return swipeDetectionStart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "swipeDetectionUpdate", function() { return swipeDetectionUpdate; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "swipeDetectionEnd", function() { return swipeDetectionEnd; });
 /* harmony import */ var _layout_control_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layout-control.js */ "./app/layout-control.js");
@@ -270,7 +268,10 @@ function swipeDetectionStart(event) {
   // Initialize touch times
 
   tDown = Math.round(event.timeStamp);
-  tUp = Infinity;
+  tUp = Infinity; // Bind late events
+
+  $(this).on('touchmove', swipeDetectionUpdate);
+  $(this).on('touchend', swipeDetectionEnd);
 }
 /**
  * Handles touchmove events. Updates swipe detection
@@ -280,11 +281,11 @@ function swipeDetectionStart(event) {
  */
 
 function swipeDetectionUpdate(event) {
-  /**
-   * Since touchend doesn't store any
-   * touches, we will need to continuously
-   * update the up touch data in touchmove
-   */
+  /*
+  Since touchend doesn't store any
+  touches, we will need to continuously
+  update the up touch data in touchmove
+  */
   // Get first touch
   var touch = event.touches[0]; // Update up vector
 
@@ -370,8 +371,13 @@ function swipeDetectionEnd(event) {
       default:
         break;
     }
-  }
+  } // Remove events
+
+
+  $(this).off('touchmove', swipeDetectionUpdate);
+  $(this).off('touchend', swipeDetectionEnd);
 }
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
