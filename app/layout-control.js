@@ -7,23 +7,36 @@
 
 let $layout = $('#layout')
 
-let state = 0
+export function getState() {
+    let pixels = $layout.css('left')
+    let firstChar = pixels[0]
+    if (firstChar === '-') {
+        return 1
+    }
+    else if (firstChar === '0') {
+        return 0
+    }
+    else {
+        return -1
+    }
+}
 
 export function goLeftAction() {
+    let state = getState()
+    console.log('Current State:', state)
     if (state > -1) {
         $layout.animate({ 'left': '+=100vw' }, 'fast')
-        state--
     }
 }
 
 export function goRightAction() {
+    let state = getState()
+    console.log('Current State:', state)
     if (state < 1) {
         $layout.animate({ 'left': '-=100vw' }, 'fast')
-        state++
     }
 }
 
 export function reset() {
     $layout.css({ 'left': '0' })
-    state = 0
 }

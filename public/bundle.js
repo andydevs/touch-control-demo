@@ -122,12 +122,13 @@ $(function () {
 /*!*******************************!*\
   !*** ./app/layout-control.js ***!
   \*******************************/
-/*! exports provided: goLeftAction, goRightAction, reset */
+/*! exports provided: getState, goLeftAction, goRightAction, reset */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "goLeftAction", function() { return goLeftAction; });
+/* WEBPACK VAR INJECTION */(function($) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getState", function() { return getState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "goLeftAction", function() { return goLeftAction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "goRightAction", function() { return goRightAction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reset", function() { return reset; });
 /**
@@ -137,28 +138,42 @@ __webpack_require__.r(__webpack_exports__);
  * Created: 7 - 22 - 2020
  */
 var $layout = $('#layout');
-var state = 0;
+function getState() {
+  var pixels = $layout.css('left');
+  var firstChar = pixels[0];
+
+  if (firstChar === '-') {
+    return 1;
+  } else if (firstChar === '0') {
+    return 0;
+  } else {
+    return -1;
+  }
+}
 function goLeftAction() {
+  var state = getState();
+  console.log('Current State:', state);
+
   if (state > -1) {
     $layout.animate({
       'left': '+=100vw'
     }, 'fast');
-    state--;
   }
 }
 function goRightAction() {
+  var state = getState();
+  console.log('Current State:', state);
+
   if (state < 1) {
     $layout.animate({
       'left': '-=100vw'
     }, 'fast');
-    state++;
   }
 }
 function reset() {
   $layout.css({
     'left': '0'
   });
-  state = 0;
 }
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
