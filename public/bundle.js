@@ -111,8 +111,8 @@ __webpack_require__.r(__webpack_exports__);
 $(function () {
   $(window).resize(_layout_control_js__WEBPACK_IMPORTED_MODULE_2__["reset"]);
   $('#layout').on('touchstart', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionStart"]);
-  $(window).on('touchmove', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionUpdate"]);
-  $(window).on('touchend', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionEnd"]);
+  $('#layout').on('touchmove', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionUpdate"]);
+  $('#layout').on('touchend', _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__["swipeDetectionEnd"]);
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 

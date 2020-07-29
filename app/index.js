@@ -18,6 +18,6 @@ $(function() {
     $(window).resize(reset)
 
     $('#layout').on('touchstart', swipeDetectionStart)
-    $(window).on('touchmove', swipeDetectionUpdate)
-    $(window).on('touchend', swipeDetectionEnd)
+    $('#layout').on('touchmove', swipeDetectionUpdate)
+    $('#layout').on('touchend', swipeDetectionEnd)
 })
