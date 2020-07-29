@@ -76,6 +76,14 @@ body {
     padding: 0pt $spacing-unit;
 }
 
+.button-controls {
+    display: flex;
+    flex-direction: row-reverse;
+    button {
+        margin: 0pt $spacing-unit / 2;
+    }
+}
+
 .profile-summary {
     display: grid;
     grid-template-rows: auto;
@@ -90,12 +98,20 @@ body {
     border: 1px solid darken($profile-color, 10%);
 }
 
-.button-controls {
-    display: flex;
-    flex-direction: row-reverse;
-    button {
-        margin: 0pt $spacing-unit / 2;
-    }
+.snippet {
+    margin: $spacing-unit 0pt;
+
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    grid-template-columns: 1fr;
+    padding: 0pt $spacing-unit;
+
+    background-color: darken($color: $snippets-color, $amount: 20%);
+    border-radius: 10pt;
+
+    box-shadow: 
+        2px 2px 6px darken($color: $snippets-color, $amount: 40%),
+        -2px -2px 6px lighten($color: $snippets-color, $amount: 10%);
 }
 
 .settings-form-row {
