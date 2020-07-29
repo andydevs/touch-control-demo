@@ -55,7 +55,7 @@ body {
 .panel {
     position: static;
     flex: 1;
-    margin: $spacing-unit;
+    margin: 0;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -73,7 +73,7 @@ body {
 }
 
 .panel-content {
-    padding: $spacing-unit;
+    padding: 0pt $spacing-unit;
 }
 
 .profile-summary {
