@@ -95,12 +95,21 @@ body {
     grid-template-columns: auto 1fr;
     gap: $spacing-unit $spacing-unit;
     align-items: center;
-}
 
-.profile-photo {
-    height: 150px;
-    border-radius: 50%;
-    border: 1px solid darken($profile-color, 10%);
+    @include on-mobile {
+        display: grid;
+        grid-template-rows: auto auto;
+        grid-template-columns: 1fr;
+        gap: $spacing-unit $spacing-unit;
+        align-items: center;
+    }
+
+    .profile-photo {
+        height: 150px;
+        border-radius: 50%;
+        border: 1px solid darken($profile-color, 10%);
+        justify-self: center;
+    }
 }
 
 .snippet {
