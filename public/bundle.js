@@ -86,31 +86,23 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./app/index.js":
-/*!**********************!*\
-  !*** ./app/index.js ***!
-  \**********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./app/carousel-control.js":
+/*!*********************************!*\
+  !*** ./app/carousel-control.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(jQuery, $) {/* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style/main.scss */ "./app/style/main.scss");
-/* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_main_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./swipe-detection.js */ "./app/swipe-detection.js");
-/* harmony import */ var _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__);
-/**
+/* WEBPACK VAR INJECTION */(function(jQuery) {/**
  * Use this template for building basic static websites
  * 
  * Author:  Anshul Kharbanda
  * Created: 7 - 22 - 2020
  */
 
-
 /**
  * Jquery plugin for get state
  */
-
 (function ($) {
   /**
    * Compute carousel state based on position
@@ -129,47 +121,89 @@ __webpack_require__.r(__webpack_exports__);
       return -1;
     }
   };
+  /**
+   * Initialize carousel system for the given element
+   * 
+   * @returns {jQuery} jquery object for chaining
+   */
+
+
+  $.fn.carouselSystem = function () {
+    // Resize handler
+    $(window).on('resize', function (event) {
+      this.css({
+        'left': '0px'
+      });
+    }); // Swipe left
+
+    this.on('swipeleft', function (event) {
+      console.group('Swipe Left');
+      var state = $(this).carouselState();
+      console.log('Current State:', state);
+
+      if (state < 1) {
+        $(this).animate({
+          'left': '-=100vw'
+        }, 'fast');
+        console.log('Go to right panel');
+      } else {
+        console.log('At rightmost panel');
+      }
+
+      console.groupEnd();
+    }) // Swipe right
+    .on('swiperight', function (event) {
+      console.group('Swipe Right');
+      var state = $(this).carouselState();
+      console.log('Current State:', state);
+
+      if (state > -1) {
+        $(this).animate({
+          'left': '+=100vw'
+        }, 'fast');
+        console.log('Go to left panel');
+      } else {
+        console.log('At leftmost panel');
+      }
+
+      console.groupEnd();
+    }); // Return jQuery
+
+    return this;
+  };
 })(jQuery);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+
+/***/ }),
+
+/***/ "./app/index.js":
+/*!**********************!*\
+  !*** ./app/index.js ***!
+  \**********************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style/main.scss */ "./app/style/main.scss");
+/* harmony import */ var _style_main_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_main_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./swipe-detection.js */ "./app/swipe-detection.js");
+/* harmony import */ var _swipe_detection_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_swipe_detection_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _carousel_control_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./carousel-control.js */ "./app/carousel-control.js");
+/* harmony import */ var _carousel_control_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_carousel_control_js__WEBPACK_IMPORTED_MODULE_2__);
+/**
+ * Use this template for building basic static websites
+ * 
+ * Author:  Anshul Kharbanda
+ * Created: 7 - 22 - 2020
+ */
+
+
 
 $(function () {
-  $(window).resize(function (event) {
-    $('#layout').css({
-      'left': '0'
-    });
-  });
-  $('#layout').swipeDetection().on('swipeleft', function (event) {
-    console.group('Swipe Left');
-    var state = $(this).carouselState();
-    console.log('Current State:', state);
-
-    if (state < 1) {
-      $(this).animate({
-        'left': '-=100vw'
-      }, 'fast');
-      console.log('Go to right panel');
-    } else {
-      console.log('At rightmost panel');
-    }
-
-    console.groupEnd();
-  }).on('swiperight', function (event) {
-    console.group('Swipe Right');
-    var state = $(this).carouselState();
-    console.log('Current State:', state);
-
-    if (state > -1) {
-      $(this).animate({
-        'left': '+=100vw'
-      }, 'fast');
-      console.log('Go to left panel');
-    } else {
-      console.log('At leftmost panel');
-    }
-
-    console.groupEnd();
-  });
+  $('#layout').swipeDetection().carouselSystem();
 });
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
