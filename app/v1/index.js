@@ -4,7 +4,7 @@
  * Author:  Anshul Kharbanda
  * Created: 7 - 22 - 2020
  */
-import './style/main.scss'
+import '../style/main.scss'
 import './swipe-detection.js'
 import './carousel-control.js'
 

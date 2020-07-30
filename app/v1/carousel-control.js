@@ -36,9 +36,9 @@
      */
     $.fn.carouselSystem = function() {
         // Resize handler
-        $(window).on('resize', function(event) {
+        $(window).on('resize', (function(event) {
             this.css({ 'left' : '0px' })
-        })
+        }).bind(this))
 
         // Swipe left
         this.on('swipeleft', function(event) {
