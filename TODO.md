@@ -1,12 +1,6 @@
 Touch Control Webpage: TODO
 ========================================================
 
-Upcoming
---------------------------------------------------------
-
-- [ ] Mobile Web Site using Hammer JS
-- [ ] Mobile Website with just scrolling
-
 Changelog
 --------------------------------------------------------
 
