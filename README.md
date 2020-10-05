@@ -1,17 +1,5 @@
-Web Template
+Touch Control Demo
 ===========================================================
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/andydevs/web-boilerplate)
-
-Use this template for building basic static websites.
-
-On the repository webpage, you can either click 
-`Use this Template` which will create a new repository with
-the template code, or you can click the "Deploy to Netlify" button in
-the README, which will both create a new repository and
-deploy a new website to Netlify.
-
-**[DELETE THE NETLIFY BUTTON AND EDIT THIS PART WITH THE DESCRIPTION OF YOUR SITE]**
 
 Development
 -----------------------------------------------------------
